@@ -1,8 +1,8 @@
 from fastapi import FastAPI, Security
-from auth0 import AuthError, get_current_user
+from auth import auth0
 
-app = FastAPI(title="API Lindo Crl",
-    description="lindocrl official api crl",
+app = FastAPI(title="Lindo Crl Official API",
+    description="lindocrl - the greatest organisation crl",
     version="1.0.0",)
 
 @app.get("/")
@@ -10,7 +10,7 @@ def health():
     return { "running": True }
 
 @app.get("/private")
-def private(user=Security(get_current_user)):
+def private(user=Security(auth0.get_current_user)):
     return {"message": "You're an authorized user"}
 
 # @app.get("/private-with-scopes")
@@ -22,4 +22,3 @@ def private(user=Security(get_current_user)):
 
 # api.lindocrl.org/cup/{year}/prediction
 # endpoint to update prediction bulk
-
